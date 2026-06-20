@@ -12,7 +12,7 @@ Instead of forcing users to start with a genre, playlist category, or preset moo
 - "music that feels like leaving a party early"
 - "something upbeat for cleaning the apartment"
 
-The core experience is intentionally simple: one text input, a few recomendations, and a reason the recommendations makes sense.
+The core experience is intentionally simple: one text input, a list of music recomendations, and maybe the reason the recommendations makes sense.
 
 ## How it works
 
@@ -25,8 +25,8 @@ User writes a music request
   -> Cue parses the request into structured fields
   -> Cue embeds the query for semantic search
   -> Pinecone returns similar songs from the dataset
-  -> GPT chooses a recommendation from the retrieved songs
-  -> Cue returns the recommendation and explanation
+  -> GPT chooses recommendations from the retrieved songs
+  -> Cue returns the recommendations and explanation
 ```
 
 The query parsing step uses OpenAI Structured Outputs to extract specific details that might otherwise get blurred inside a vibe-based search. For example:
@@ -218,13 +218,4 @@ After the MVP recommendation loop is working well, possible stretch goals includ
 - Weather integration
 - Calendar integration
 - Regenerate and feedback controls
-
-## Contributing
-
-Project workflow, branch naming, pull request expectations, and task ownership are documented in:
-
-- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
-- [docs/Task_Breakdown.md](docs/Task_Breakdown.md)
-- [docs/ToDo.md](docs/ToDo.md)
-
 
