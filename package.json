@@ -18,14 +18,16 @@
     "doc": "docs"
   },
   "scripts": {
-    "start":"nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts & webpack-dev-server --hot --progress --color",
-    "server":"nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts",
+    "start": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts & webpack-dev-server --hot --progress --color",
+    "server": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts",
     "test": "jest",
-    "upsert-batch":"node --no-warnings=ExperimentalWarning --loader ts-node/esm ./offline/upsert-batch.ts"
+    "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
+    "check-genres": "ts-node-esm ./offline/check-genres.ts"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^8.0.0",
     "cors": "^2.8.6",
+    "csv-parse": "^7.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "openai": "^6.44.0",
