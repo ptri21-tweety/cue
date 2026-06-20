@@ -22,7 +22,8 @@
     "server": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts",
     "test": "jest",
     "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
-    "check-genres": "ts-node-esm ./offline/check-genres.ts"
+    "check-genres": "ts-node-esm ./offline/check-genres.ts",
+    "prepare-songs": "ts-node-esm ./offline/prepare-songs.ts"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^8.0.0",

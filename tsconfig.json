@@ -10,13 +10,15 @@
     "target": "ES2017",
     "allowJs": true,
     "jsx": "react",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
   },
   "ts-node": {
     "esm": true,
     "transpileOnly": true,
     "compilerOptions": {
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "allowImportingTsExtensions": true
     }
   },
   "include": ["client/**/*", "server/**/*", "offline/**/*", "types/*.ts"],
