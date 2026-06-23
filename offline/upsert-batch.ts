@@ -1,6 +1,9 @@
-// read processed sample file
-// embed songs
-// upsert to Pinecone
+// read offline/processed_songs.json
+// build embedding text for each song
+// call OpenAI text-embedding-3-small
+// create Pinecone records
+// batch upsert into songs
+// log success
 
 /*
   PURPOSE 
@@ -16,9 +19,13 @@ import OpenAI from 'openai';
 import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
 import 'dotenv/config';
 
-import { SongMetadata } from './types.ts';
+import type { SongMetadata } from './types.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 //create the Pinecone client 
 //automatically connects finds the PINE_API_KEY from .env
@@ -30,10 +37,6 @@ const pinecone = new Pinecone();
 const index = pinecone.index<SongMetadata>('songs');
 
 //define the shape of each item in embeddings_data.json
-interface EmbeddingData {
-  song: SongMetadata;
-  embedding: OpenAI.Embedding['embedding'];
-}
 
 /**
  * Generate Pinecone records from embeddings data.

@@ -31,7 +31,7 @@ function hasEnoughSongs(): boolean {
 }
 
 function isEnglish(row: any): boolean {
-  return row.language?.trim().toLowercase() === 'en';
+  return row.language?.trim().toLowerCase() === 'en';
 }
 
 function hasCompleteLyrics(row: any): boolean {
@@ -46,11 +46,16 @@ function buildSongMetadata(row: any): SongMetadata {
     genre: row.tag.trim() as Genre,
     year: row.year.trim(),
     lyrics: row.lyrics.trim(),
-    language: row.language,
+    language: row.language.trim(),
   };
 }
 
+let hasWrittenOutput = false;
+
 function writeProcessedSongs() {
+  if (hasWrittenOutput) return;
+
+  hasWrittenOutput = true;
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(selectedSongs, null, 2));
   console.table(genreCounts);
   console.log(`Wrote ${selectedSongs.length} songs to ${OUTPUT_PATH}`);
