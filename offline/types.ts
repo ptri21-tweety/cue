@@ -1,14 +1,6 @@
+export type Genre = 'rap' | 'rb' | 'rock' | 'pop' | 'country';
 
-export type Genre = 'rap' | 'rb' | 'rock' | 'pop' | 'misc' | 'country';
-
-export const TARGET_GENRES: Genre[] = [
-  'rap',
-  'rb',
-  'rock',
-  'pop',
-  'misc',
-  'country',
-];
+export const TARGET_GENRES: Genre[] = ['rap', 'rb', 'rock', 'pop', 'country'];
 
 export type SongMetadata = {
   id: string;
