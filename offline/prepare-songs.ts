@@ -18,7 +18,6 @@ const genreCounts: Record<Genre, number> = {
   rb: 0,
   rock: 0,
   pop: 0,
-  misc: 0,
   country: 0,
 };
 
@@ -27,7 +26,7 @@ function isTargetGenre(value: string): value is Genre {
 }
 
 function hasEnoughSongs(): boolean {
-  return TARGET_GENRES.every((genre) => genreCounts[genre] >= SONGS_PER_GENRE);
+  return TARGET_GENRES.every(genre => genreCounts[genre] >= SONGS_PER_GENRE);
 }
 
 function isEnglish(row: any): boolean {
@@ -35,7 +34,10 @@ function isEnglish(row: any): boolean {
 }
 
 function hasCompleteLyrics(row: any): boolean {
-  return typeof row.lyrics === 'string' && row.lyrics.trim().length >= MIN_LYRICS_LENGTH;
+  return (
+    typeof row.lyrics === 'string' &&
+    row.lyrics.trim().length >= MIN_LYRICS_LENGTH
+  );
 }
 
 function buildSongMetadata(row: any): SongMetadata {
@@ -70,7 +72,7 @@ readStream
       relax_quotes: true,
       relax_column_count: true,
       skip_empty_lines: true,
-    })
+    }),
   )
   .on('data', (row: any) => {
     const genre = row.tag?.trim();
@@ -78,7 +80,13 @@ readStream
     if (!genre || !isTargetGenre(genre)) return;
     if (genreCounts[genre] >= SONGS_PER_GENRE) return;
     if (!isEnglish(row)) return;
-    if (!row.id?.trim() || !row.title?.trim() || !row.artist?.trim() || !row.year?.trim()) return;
+    if (
+      !row.id?.trim() ||
+      !row.title?.trim() ||
+      !row.artist?.trim() ||
+      !row.year?.trim()
+    )
+      return;
     if (!hasCompleteLyrics(row)) return;
 
     const song = buildSongMetadata(row);
@@ -87,11 +95,11 @@ readStream
     genreCounts[genre] += 1;
 
     if (hasEnoughSongs()) {
-       writeProcessedSongs(); 
+      writeProcessedSongs();
       readStream.destroy();
     }
   })
-  .on('error', (error) => {
+  .on('error', error => {
     console.error('Failed to parse CSV:');
     console.error(error);
   })

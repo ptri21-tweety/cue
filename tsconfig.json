@@ -11,6 +11,7 @@
     "allowJs": true,
     "jsx": "react",
     "skipLibCheck": true,
+    "noEmit": true,
     "allowImportingTsExtensions": true
   },
   "ts-node": {
