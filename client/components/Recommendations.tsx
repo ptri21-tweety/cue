@@ -40,28 +40,35 @@ const Recommendations = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <form onSubmit={handleSubmit}>
-        <label>
-          vibe:
-          <input
-            type="text"
-            value={userQuery}
-            onChange={(e) => setUserQuery(e.target.value)}
-            placeholder="what are you feelin?"
-            style={{ width: '100%', padding: '8px', marginTop: '8px' }}
-          />
-        </label>
-        <button type="submit" style={{ marginTop: '16px' }} disabled={loading}>
-          {loading ? 'Loading...' : 'Get Recommendation'}
-        </button>
-      </form>
-      {error && <p className="error">{error}</p>}
+    <div className="app-shell">
+      <section className="search-panel" aria-labelledby="search-heading">
+        <p className="eyebrow">Cue</p>
+        <h2 id="search-heading">Find the right track for the moment</h2>
+        <form className="search-form" onSubmit={handleSubmit}>
+          <label htmlFor="music-query">What do you want to hear?</label>
+          <div className="search-row">
+            <input
+              id="music-query"
+              type="text"
+              value={userQuery}
+              onChange={(e) => setUserQuery(e.target.value)}
+              placeholder="rainy night drive, 90s R&B, nervous energy..."
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? 'Searching...' : 'Find Songs'}
+            </button>
+          </div>
+        </form>
+        {error && <p className="error">{error}</p>}
+      </section>
+
       {recommendation && (
-        <div style={{ marginTop: '24px' }}>
-          <h2>Recommendations:</h2>
-          <ReactMarkdown>{recommendation}</ReactMarkdown>
-        </div>
+        <section className="result" aria-live="polite">
+          <h2>Recommendations</h2>
+          <div className="recommendation-output">
+            <ReactMarkdown>{recommendation}</ReactMarkdown>
+          </div>
+        </section>
       )}
     </div>
   );
