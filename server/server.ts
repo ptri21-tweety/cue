@@ -5,7 +5,7 @@ import { ServerError } from './types'
 
 // TODO: import controllers once names are confirmed
 // queryParseController, embedQuery, queryPinecone, generateRecommendation, loggingMiddleware
-import { queryParse } from './controllers/queryParseController'
+import queryParse  from './controllers/queryParseController'
 
 
 const app = express()
