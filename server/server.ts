@@ -6,6 +6,7 @@ import { ServerError } from './types'
 // TODO: import controllers once names are confirmed
 // queryParseController, embedQuery, queryPinecone, generateRecommendation, loggingMiddleware
 import queryParse  from './controllers/queryParseController'
+import loggingMiddleware from './middleware/loggingMiddleware'
 
 
 const app = express()
@@ -19,7 +20,7 @@ app.post('/api/search',
   // embedQuery,
   // queryPinecone,
   // generateRecommendation,
-  // loggingMiddleware,
+  loggingMiddleware,
   (req, res, next) => {
   res.status(200).json({
     songRecs: res.locals.recommendation
