@@ -30,6 +30,20 @@ export default defineConfig([
   ...tseslint.configs.recommended,
   reactPlugin.configs.flat.recommended,
   {
+    // Jest globals
+    files: [
+      '**/__tests__/**/*.{js,ts,jsx,tsx}',
+
+      '**/*.{test,spec}.{js,ts,jsx,tsx}',
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+  },
+  {
+    // Custom rules
     rules: {
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
