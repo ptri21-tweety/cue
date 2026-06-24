@@ -12,7 +12,8 @@
     "jsx": "react",
     "skipLibCheck": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "types": ["node", "jest"]
   },
   "ts-node": {
     "esm": true,

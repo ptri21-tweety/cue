@@ -7,7 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig([
-  globalIgnores(['dist/**', '.vscode/**']),
+  globalIgnores(['dist/**', 'vscode/**']),
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     settings: {
@@ -26,9 +26,19 @@ export default defineConfig([
       },
     },
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  reactPlugin.configs.flat.recommended,
+
+  // Server and Node scripts
+
+  {
+    files: ['server/**/*.{js,ts}', 'offline/**/*.{js,ts}'],
+
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
   {
     // Jest globals
     files: [
@@ -42,6 +52,9 @@ export default defineConfig([
       },
     },
   },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactPlugin.configs.flat.recommended,
   {
     // Custom rules
     rules: {
