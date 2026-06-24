@@ -5,6 +5,7 @@ import { ServerError } from './types'
 
 // TODO: import controllers once names are confirmed
 // queryParseController, embedQuery, queryPinecone, generateRecommendation, loggingMiddleware
+import queryParse  from './controllers/queryParseController'
 
 
 const app = express()
@@ -14,14 +15,14 @@ app.use(cors())
 app.use(express.json())
 
 app.post('/api/search', 
-  // queryParse,
+  queryParse,
   // embedQuery,
   // queryPinecone,
   // generateRecommendation,
   // loggingMiddleware,
   (req, res, next) => {
   res.status(200).json({
-    somgRecs: res.locals.recommendation
+    songRecs: res.locals.recommendation
   })
 })
 
