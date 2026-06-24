@@ -24,7 +24,8 @@
     "check-genres": "ts-node-esm ./offline/check-genres.ts",
     "prepare-songs": "ts-node-esm ./offline/prepare-songs.ts",
     "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
-    "clear-index": "ts-node-esm offline/clear-index.ts"
+    "clear-index": "ts-node-esm offline/clear-index.ts",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^8.0.0",
