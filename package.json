@@ -24,7 +24,8 @@
     "check-genres": "ts-node-esm ./offline/check-genres.ts",
     "prepare-songs": "ts-node-esm ./offline/prepare-songs.ts",
     "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
-    "clear-index": "ts-node-esm offline/clear-index.ts"
+    "clear-index": "ts-node-esm offline/clear-index.ts",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^8.0.0",
@@ -35,6 +36,7 @@
     "openai": "^6.44.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-markdown": "^10.1.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -57,8 +59,10 @@
     "babel-loader": "^10.1.1",
     "css-loader": "^7.1.4",
     "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.7.0",
     "html-webpack-plugin": "^5.6.7",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
