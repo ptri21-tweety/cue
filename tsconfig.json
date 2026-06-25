@@ -11,9 +11,9 @@
     "allowJs": true,
     "jsx": "react",
     "skipLibCheck": true,
-    "noEmit": true,
     "allowImportingTsExtensions": true,
-    "types": ["node", "jest"]
+    "rewriteRelativeImportExtensions": true,
+    "types": ["node", "jest"],
   },
   "ts-node": {
     "esm": true,
@@ -23,6 +23,6 @@
       "allowImportingTsExtensions": true
     }
   },
-  "include": ["client/**/*", "server/**/*", "offline/**/*", "types/*.ts"],
+  "include": ["client/**/*", "server/**/*", "offline/**/*", "types/**/*"],
   "exclude": ["node_modules", "dist"]
 }
