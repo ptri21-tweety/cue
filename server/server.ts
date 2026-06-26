@@ -22,13 +22,13 @@ app.post('/api/search',
   searchController,
   recommendationController,
   loggingMiddleware,
-  (req, res, next) => {
+  (_req, res, _next) => {
   res.status(200).json({
     recommendation: res.locals.recommendation
   })
 })
 
-const errorHandler: ErrorRequestHandler= (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler= (err, _req, res, _next) => {
   const defaultErr: ServerError = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
