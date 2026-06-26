@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import OpenAI from 'openai';
 import { Pinecone } from '@pinecone-database/pinecone';
-import type { SongMetadata, ParsedQuery } from '../types.ts';
+import type { SongMetadata, ParsedQuery } from '../types';
 
 // Create API clients.
 const openai = new OpenAI({
