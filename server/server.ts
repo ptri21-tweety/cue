@@ -1,13 +1,15 @@
 import 'dotenv/config' // loads varibles immeaditatly
-import express, { ErrorRequestHandler } from 'express'
-import cors from 'cors'
-import { ServerError } from './types'
+import express from 'express';
+import type { ErrorRequestHandler } from 'express';
+import cors from 'cors';
+import type { ServerError } from './types';
 
 // TODO: import controllers once names are confirmed
 // queryParseController, embedQuery, queryPinecone, generateRecommendation, loggingMiddleware
-import queryParse  from './controllers/queryParseController'
-import loggingMiddleware from './middleware/loggingMiddleware'
-
+import queryParse  from './controllers/queryParseController.ts';
+import loggingMiddleware from './middleware/loggingMiddleware.ts';
+import { searchController } from './controllers/searchController.ts';
+import { recommendationController } from './controllers/recommendationController.ts';
 
 const app = express()
 const PORT = 3000
@@ -17,17 +19,16 @@ app.use(express.json())
 
 app.post('/api/search', 
   queryParse,
-  // embedQuery,
-  // queryPinecone,
-  // generateRecommendation,
+  searchController,
+  recommendationController,
   loggingMiddleware,
-  (req, res, next) => {
+  (_req, res, _next) => {
   res.status(200).json({
-    songRecs: res.locals.recommendation
+    recommendation: res.locals.recommendation
   })
 })
 
-const errorHandler: ErrorRequestHandler= (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler= (err, _req, res, _next) => {
   const defaultErr: ServerError = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,

@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "target": "ES2017",
     "allowJs": true,
     "jsx": "react",
@@ -14,15 +14,15 @@
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "types": ["node", "jest"],
+    "ignoreDeprecations": "6.0"
   },
   "ts-node": {
     "esm": true,
     "transpileOnly": true,
     "compilerOptions": {
-      "moduleResolution": "node",
       "allowImportingTsExtensions": true
     }
   },
-  "include": ["client/**/*", "server/**/*", "offline/**/*", "types/**/*"],
+  "include": ["client/**/*", "server/**/*", "offline/**/*", "types/**/*","webpack.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
