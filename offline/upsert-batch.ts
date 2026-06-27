@@ -16,7 +16,7 @@ import { Pinecone } from '@pinecone-database/pinecone';
 import type { PineconeRecord } from '@pinecone-database/pinecone';
 import 'dotenv/config';
 
-import type { SongMetadata } from './types.ts';
+import type { SongMetadata } from '../server/types.ts';
 
 // ES module equivalent of __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -47,7 +47,7 @@ const loadVariableFromJSON = async <T>(filename: string): Promise<T> => {
 // Split records into batches because we shouldn't upload thousands at once.
 const createPineconeBatches = (
   records: PineconeRecord<SongMetadata>[],
-  batchSize = 200,
+  batchSize = 200
 ): PineconeRecord<SongMetadata>[][] => {
   const batches: PineconeRecord<SongMetadata>[][] = [];
 
@@ -60,7 +60,7 @@ const createPineconeBatches = (
 
 // Upload each batch to Pinecone.
 const upsertBatchesToPinecone = async (
-  batches: PineconeRecord<SongMetadata>[][],
+  batches: PineconeRecord<SongMetadata>[][]
 ): Promise<void> => {
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
@@ -68,7 +68,7 @@ const upsertBatchesToPinecone = async (
     console.log(
       `Upserting batch ${i + 1} of ${batches.length}: IDs ${
         batch[0].id
-      } through ${batch[batch.length - 1].id}`,
+      } through ${batch[batch.length - 1].id}`
     );
 
     await index.upsert({
@@ -82,7 +82,7 @@ const upsertBatchesToPinecone = async (
 const main = async (): Promise<void> => {
   // Load songs from disk.
   const songs = await loadVariableFromJSON<SongMetadata[]>(
-    'processed_songs.json',
+    'processed_songs.json'
   );
 
   if (songs.length === 0) {
@@ -90,7 +90,7 @@ const main = async (): Promise<void> => {
   }
 
   // Convert each song object into a string.
-  const songInputs = songs.map(song =>
+  const songInputs = songs.map((song) =>
     `
 Title: ${song.title}
 Artist: ${song.artist}
@@ -98,7 +98,7 @@ Genre: ${song.genre}
 Year: ${song.year}
 
 Lyrics: ${song.lyrics}
-`.trim(),
+`.trim()
   );
 
   console.log(`Creating embeddings for ${songs.length} songs...`);
@@ -116,7 +116,7 @@ Lyrics: ${song.lyrics}
       id: song.id,
       values: response.data[i].embedding,
       metadata: song,
-    }),
+    })
   );
 
   // Split records into batches and upload them.
@@ -127,7 +127,7 @@ Lyrics: ${song.lyrics}
   console.log('Finished uploading songs to Pinecone.');
 };
 
-main().catch(error => {
+main().catch((error) => {
   console.error('Error running offline upload script:', error);
   process.exit(1);
 });

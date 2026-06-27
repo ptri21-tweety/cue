@@ -4,8 +4,9 @@
 
 import fs from 'node:fs';
 import { parse } from 'csv-parse';
-import { TARGET_GENRES } from './types.ts';
-import type { Genre, SongMetadata } from './types.ts';
+import { TARGET_GENRES } from '../server/types.ts';
+import type { Genre, SongMetadata } from '../server/types.ts';
+import type { CsvRow } from '../server/types.ts';
 
 const RAW_CSV_PATH = './offline/raw_data/song_lyrics.csv';
 const OUTPUT_PATH = './offline/processed_songs.json';
@@ -26,21 +27,21 @@ function isTargetGenre(value: string): value is Genre {
 }
 
 function hasEnoughSongs(): boolean {
-  return TARGET_GENRES.every(genre => genreCounts[genre] >= SONGS_PER_GENRE);
+  return TARGET_GENRES.every((genre) => genreCounts[genre] >= SONGS_PER_GENRE);
 }
 
-function isEnglish(row: any): boolean {
+function isEnglish(row: CsvRow): boolean {
   return row.language?.trim().toLowerCase() === 'en';
 }
 
-function hasCompleteLyrics(row: any): boolean {
+function hasCompleteLyrics(row: CsvRow): boolean {
   return (
     typeof row.lyrics === 'string' &&
     row.lyrics.trim().length >= MIN_LYRICS_LENGTH
   );
 }
 
-function buildSongMetadata(row: any): SongMetadata {
+function buildSongMetadata(row: CsvRow): SongMetadata {
   return {
     id: row.id,
     title: row.title.trim(),
@@ -72,9 +73,9 @@ readStream
       relax_quotes: true,
       relax_column_count: true,
       skip_empty_lines: true,
-    }),
+    })
   )
-  .on('data', (row: any) => {
+  .on('data', (row: CsvRow) => {
     const genre = row.tag?.trim();
 
     if (!genre || !isTargetGenre(genre)) return;
@@ -99,7 +100,7 @@ readStream
       readStream.destroy();
     }
   })
-  .on('error', error => {
+  .on('error', (error) => {
     console.error('Failed to parse CSV:');
     console.error(error);
   })

@@ -18,9 +18,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts & webpack-dev-server --hot --progress --color",
-    "server": "nodemon --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./server/server.ts",
+    "start": "nodemon --exec ts-node-esm ./server/server.ts & webpack-dev-server --hot --progress --color",
+    "server": "ts-node-esm ./server/server.ts",
     "test": "jest",
+    "eval": "ts-node-esm ./evaluation/eval.ts",
     "check-genres": "ts-node-esm ./offline/check-genres.ts",
     "prepare-songs": "ts-node-esm ./offline/prepare-songs.ts",
     "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
@@ -51,7 +52,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.9.3",
+    "@types/node": "^25.9.4",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@types/supertest": "^7.2.0",
