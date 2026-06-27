@@ -1,5 +1,5 @@
 import type { ScoredPineconeRecord } from "@pinecone-database/pinecone";
-import type { SongMetadata } from "../../offline/types";
+import type { SongMetadata } from "../types";
 
 type ParsedQuery = { 
   userQuery: string; 

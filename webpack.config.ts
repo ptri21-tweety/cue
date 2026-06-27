@@ -17,7 +17,7 @@ export default {
     host: 'localhost',
     port: 8080,
     static: {
-      directory: path.resolve(__dirname, '/dist'),
+      directory: path.resolve(__dirname, 'dist'),
       publicPath: '/',
     },
     proxy: [
