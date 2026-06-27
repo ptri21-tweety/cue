@@ -1,0 +1,74 @@
+[
+  {
+    "id": "genre-confident-rap",
+    "query": "confident rap song",
+    "tests": ["genre", "mood"],
+    "acceptable_song_ids": ["1", "5", "6"],
+    "acceptable_songs": ["Killa Cam", "Down and Out", "Fly In"],
+    "acceptable_genres": ["rap"],
+    "acceptable_artists": ["Cam'ron", "Lil Wayne"],
+    "should_not_return_song_ids": ["2873", "2504", "2520"],
+    "should_not_return_songs": ["Rocky Mountain High", "1 Corinthians 15:55", "Mine"],
+    "notes": "Checks whether retrieval returns rap songs with bold, confident energy."
+  },
+  {
+    "id": "mood-sad-late-night",
+    "query": "sad late night song",
+    "tests": ["mood"],
+    "acceptable_song_ids": ["235", "526", "791", "1165"],
+    "acceptable_songs": ["Miss You Remix", "Heartless", "All I Want Is You", "Leave the Bourbon on the Shelf"],
+    "acceptable_genres": ["rb", "pop", "rock"],
+    "acceptable_artists": ["Aaliyah", "Kanye West", "Miguel", "The Killers"],
+    "should_not_return_song_ids": ["148", "566", "1290"],
+    "should_not_return_songs": ["Yeah", "Baby", "White Riot"],
+    "notes": "Checks whether retrieval can find emotional, lonely, or reflective songs."
+  },
+  {
+    "id": "activity-rainy-morning",
+    "query": "song for a rainy morning",
+    "tests": ["activity_scene"],
+    "acceptable_song_ids": ["384", "2873", "2504"],
+    "acceptable_songs": ["Horchata", "Rocky Mountain High", "1 Corinthians 15:55"],
+    "acceptable_genres": ["pop", "country"],
+    "acceptable_artists": ["Vampire Weekend", "John Denver", "Johnny Cash"],
+    "should_not_return_song_ids": ["1", "1290", "3499"],
+    "should_not_return_songs": ["Killa Cam", "White Riot", "Fuck Off"],
+    "notes": "Checks whether retrieval can match a quiet, calm, or reflective scene."
+  },
+  {
+    "id": "metadata-rock-2005",
+    "query": "rock song from 2005",
+    "tests": ["artist_title_year"],
+    "acceptable_song_ids": ["1181"],
+    "acceptable_songs": ["Neighborhood 2 Laïka"],
+    "acceptable_genres": ["rock"],
+    "acceptable_artists": ["Arcade Fire"],
+    "should_not_return_song_ids": ["3", "526", "2520"],
+    "should_not_return_songs": ["Can I Live", "Heartless", "Mine"],
+    "notes": "Checks whether retrieval can respect year and genre details."
+  },
+  {
+    "id": "vibe-dramatic-intense",
+    "query": "something dramatic and intense",
+    "tests": ["broad_vibe"],
+    "acceptable_song_ids": ["1063", "1290", "2518"],
+    "acceptable_songs": ["Bohemian Rhapsody", "White Riot", "Bullets In The Gun"],
+    "acceptable_genres": ["rock", "country"],
+    "acceptable_artists": ["Queen", "The Clash", "Toby Keith"],
+    "should_not_return_song_ids": ["384", "827", "2873"],
+    "should_not_return_songs": ["Horchata", "Meiplé", "Rocky Mountain High"],
+    "notes": "Checks whether retrieval can match a broad dramatic or intense emotional vibe."
+  },
+  {
+    "id": "fallback-study-quietly",
+    "query": "song for studying quietly",
+    "tests": ["fallback"],
+    "acceptable_song_ids": ["2873", "2504", "384"],
+    "acceptable_songs": ["Rocky Mountain High", "1 Corinthians 15:55", "Horchata"],
+    "acceptable_genres": ["country", "pop"],
+    "acceptable_artists": ["John Denver", "Johnny Cash", "Vampire Weekend"],
+    "should_not_return_song_ids": ["1", "1290", "3499"],
+    "should_not_return_songs": ["Killa Cam", "White Riot", "Fuck Off"],
+    "notes": "Checks whether retrieval returns the closest calm songs even when the dataset has no perfect study music."
+  }
+]
