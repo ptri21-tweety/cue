@@ -21,6 +21,7 @@
     "start": "nodemon --exec ts-node-esm ./server/server.ts & webpack-dev-server --hot --progress --color",
     "server": "ts-node-esm ./server/server.ts",
     "test": "jest",
+    "eval": "ts-node-esm ./evaluation/eval.ts",
     "check-genres": "ts-node-esm ./offline/check-genres.ts",
     "prepare-songs": "ts-node-esm ./offline/prepare-songs.ts",
     "upsert-batch": "ts-node-esm ./offline/upsert-batch.ts",
